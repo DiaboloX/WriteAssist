@@ -23,7 +23,7 @@ class EmailGenerator:
             return ''.join(changed)
 
 # Example usage
-st.write("API_KEY:", st.secrets["api_key"])
+st.write("api_key:", st.secrets["API_KEY"])
 generator = EmailGenerator(api_key)
 
 st.title("Email Generator")
