@@ -4,7 +4,7 @@ import openai
 
 class EmailGenerator:
     def __init__(self, api_key):
-        openai.api_key = api_key
+        openai.api_key = st.secrets["API_KEY"]
         self.model = "gpt-3.5-turbo"
 
     def generate_email(self, messages):
@@ -22,9 +22,8 @@ class EmailGenerator:
                     changed[i] = '+'
             return ''.join(changed)
 
-# Example usage
-st.write("api_key:", st.secrets["API_KEY"])
-generator = EmailGenerator(api_key)
+# Example usageb
+generator = EmailGenerator(st.secrets["API_KEY"])
 
 st.title("Email Generator")
 st.text("by Your Name")
