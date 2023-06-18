@@ -23,10 +23,9 @@ class EmailGenerator:
             return ''.join(changed)
 
 # Example usageb
-generator = EmailGenerator(st.secrets["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"])
+generator = EmailGenerator(st.secrets["API_KEY"])
 
-st.title("Email Generator")
-st.text("by Your Name")
+st.title("WriteAssist")
 
 email_type = st.selectbox("Select the type of email:", ("Formal/Professional", "Informal"))
 recipient = st.text_input("Recipient Name or Position:")
