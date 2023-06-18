@@ -22,12 +22,27 @@ class EmailGenerator:
                     changed[i] = '+'
             return ''.join(changed)
 
-# Example usageb
+# Create an instance of the EmailGenerator
 generator = EmailGenerator(st.secrets["API_KEY"])
 
-st.title("Email Generator")
-st.text("by Your Name")
+# Set the page layout
+st.set_page_config(
+    page_title="Email Generator",
+    page_icon="✉️",
+    layout="wide",
+    initial_sidebar_state="auto"
+)
 
+# Define the header
+st.header("WriteAssist")
+st.subheader("by Jagteshwar Singh")
+st.markdown("---")
+
+# Define the content area
+st.title("Generate Email")
+st.text("Choose the email type, recipient, and subject below:")
+
+# Email generation form
 email_type = st.selectbox("Select the type of email:", ("Formal/Professional", "Informal"))
 recipient = st.text_input("Recipient Name or Position:")
 subject = st.text_input("Email Subject:")
@@ -38,31 +53,26 @@ if st.button(label="Generate Email"):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": f"Write a formal email to {recipient} regarding {subject}."},
         ]
+        pass
     else:
         messages = [
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": f"Write an informal email to {recipient} about {subject}."},
         ]
+        pass
 
-    email = generator.generate_email(messages)
-
+    # Display the generated email
     st.subheader("Generated Email:")
     st.text_area("", value=email, height=300, max_chars=None, key=None)
-    
-   
+    st.markdown("---")
 
-    if st.button:
-        with st.spinner("Generating Email..."):
-            email = generator.generate_email(messages)
-        st.markdown("# Email Output:")
-        st.subheader(email)
-
-        st.markdown("____")
-        st.markdown("# Send Your Email")
-        st.subheader("You can press the Generate Email Button again if you're unhappy with the model's output")
-        
-        st.subheader("Otherwise:")
-        st.text(email)
+    # Send email button
+    if st.button("Send Email"):
         url = "https://mail.google.com/mail/?view=cm&fs=1&to=&su=&body=" + generator.replace_spaces_with_pluses(email)
+        webbrowser.open_new_tab(url)
 
-        st.markdown("[Click me to send the email]({})".format(url))
+# Define the footer
+st.markdown("---")
+st.subheader("Contact Information")
+st.text("Connect with me on GitHub: [Your GitHub Profile](https://github.com/DiaboloX)")
+st.text("Find me on LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/your-linkedin-profile)")
